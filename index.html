@@ -200,14 +200,19 @@
             document.getElementById("customPopup").style.display = "none";
         }
 
-        // JW Player Setup
-        jwplayer("jwplayerDiv").setup({
-            file: "https://002.fclplayer.online/live/csstream2/chunklist.m3u8?vidictid=201762957617&id=1002",
-            autostart: true,
-            width: "100%",
-            height: "100%",
-            stretching: "uniform"
-        });
+          // Fetch JSON and Load JW Player
+        fetch("https://raw.githubusercontent.com/StmpupCricket/Star-Sports-Hindi-json/refs/heads/main/data.json") // Replace with actual hosted JSON URL
+            .then(response => response.json())
+            .then(data => {
+                jwplayer("jwplayerDiv").setup({
+                    file: data.stream_url,
+                    autostart: true,
+                    width: "100%",
+                    height: "100%",
+                    stretching: "uniform"
+                });
+            })
+            .catch(error => console.error("Error loading JSON:", error));
     </script>
 
 </body>
